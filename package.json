@@ -4,6 +4,9 @@
   "private": true,
   "description": "Hack The Valley 2 Web Sockets Workshop",
   "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/omarchehab98/htv2-sockets.git"
@@ -13,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/omarchehab98/htv2-sockets/issues"
   },
-  "homepage": "https://github.com/omarchehab98/htv2-sockets#readme"
+  "homepage": "https://github.com/omarchehab98/htv2-sockets#readme",
+  "devDependencies": {
+    "browser-sync": "^2.23.5",
+    "nodemon": "^1.14.11"
+  },
+  "dependencies": {
+    "socket.io": "^2.0.4"
+  }
 }
