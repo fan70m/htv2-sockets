@@ -1,5 +1,5 @@
 function randomInteger(from, to) {
-  return Math.round(Math.random() * (to - from)) + from
+  return Math.round(Math.random() * (to - from - 1)) + from
 }
 
 module.exports = {

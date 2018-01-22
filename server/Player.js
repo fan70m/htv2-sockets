@@ -10,24 +10,50 @@ class Player {
     const y = randomInteger(4, world.height - 4)
     this.pieces = [
       new PlayerPiece(x, y),
-    ];
-    this.dx = 1
-    this.dy = 0
+    ]
+    this.direction = 'right'
+    this.nextDirection = null
+  }
+
+  get dx() {
+    switch (this.direction) {
+      case 'up': return 0
+      case 'right': return 1
+      case 'down': return 0
+      case 'left': return -1
+    }
+  }
+
+  get dy() {
+    switch (this.direction) {
+      case 'up': return -1
+      case 'right': return 0
+      case 'down': return 1
+      case 'left': return 0
+    }
   }
 
   move() {
     const head = this.head()
     this.pieces.shift()
-    const x = Math.min(Math.max(head.x + this.dx, 0), world.width)
-    const y = Math.min(Math.max(head.y + this.dy, 0), world.height)
+    const x = Math.min(Math.max(head.x + this.dx, 0), world.width - 1)
+    const y = Math.min(Math.max(head.y + this.dy, 0), world.height - 1)
     this.pieces.push(new PlayerPiece(x, y))
+    if (this.nextDirection) {
+      this.direction = this.nextDirection
+      this.nextDirection = null
+    }
   }
 
   grow() {
     const head = this.head()
-    const x = Math.min(Math.max(head.x + this.dx, 0), world.width)
-    const y = Math.min(Math.max(head.y + this.dy, 0), world.height)
+    const x = Math.min(Math.max(head.x + this.dx, 0), world.width - 1)
+    const y = Math.min(Math.max(head.y + this.dy, 0), world.height - 1)
     this.pieces.push(new PlayerPiece(x, y))
+    if (this.nextDirection) {
+      this.direction = this.nextDirection
+      this.nextDirection = null
+    }
   }
 
   head() {
@@ -36,21 +62,15 @@ class Player {
 
   setDirection(direction) {
     if (
-      direction === 'up' && this.dy === 1 ||
-      direction === 'right' && this.dx === -1 ||
-      direction === 'down' && this.dy === -1 ||
-      direction === 'left' && this.dx === 1
+      direction === 'up' && this.direction === 'down' ||
+      direction === 'right' && this.direction === 'left' ||
+      direction === 'down' && this.direction === 'up' ||
+      direction === 'left' && this.direction === 'right'
     ) {
-      return;
+      return
     }
-    this.dx = this.dy = 0;
-    switch (direction) {
-      case 'up': this.dy = -1; break;
-      case 'right': this.dx = 1; break;
-      case 'down': this.dy = 1; break;
-      case 'left': this.dx = -1; break;
-    }
-  } 
+    this.nextDirection = direction
+  }
 
   serialize() {
     return {

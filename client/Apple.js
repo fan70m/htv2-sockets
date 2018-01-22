@@ -1,10 +1,10 @@
-class Apple {
+export default class Apple {
   constructor(apple) {
     this.x = apple.x
     this.y = apple.y
   }
 
-  paint() {
+  paint(ctx) {
     ctx.fillStyle = 'orangered'
     ctx.fillRect(this.x * 19, this.y * 19, 18, 18)
   }

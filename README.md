@@ -35,11 +35,19 @@ $ npm --version
 # 5.something
 ```
 
-## Running
+## Production
 
 ```
-# Download and change directory into it
+# Download repo and change directory into it
 $ npm install
+$ npm run build
 $ npm start
 ```
 
+## Development
+
+```
+# Download repo and change directory into it
+$ npm install
+$ npm run watch
+```

@@ -1,12 +1,18 @@
-class Player {
-  constructor(player) {
-    this.id = player.id
+import PlayerPiece from './PlayerPiece'
+
+export default class Player {
+  constructor(player, {
+    isOwnedByPlayer
+  }) {
     this.pieces = player.pieces.map((piece, i) =>
-      new PlayerPiece(player.id, piece, i == player.pieces.length - 1)
-    );
+      new PlayerPiece(piece, {
+        isHead: i == player.pieces.length - 1,
+        isOwnedByPlayer,
+      })
+    )
   }
 
-  paint() {
-    this.pieces.forEach(piece => piece.paint())
+  paint(ctx) {
+    this.pieces.forEach(piece => piece.paint(ctx))
   }
 }

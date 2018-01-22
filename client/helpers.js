@@ -1,13 +1,19 @@
-function stringToColor(str) {
-  var hash = 0;
-  for (var i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
+export function keyCodeToDirection(keyCode) {
+  switch(event.keyCode) {
+    case 87: // w
+    case 38: // up
+      return 'up'
+
+    case 68: // d
+    case 39: // right
+      return 'right'
+
+    case 83: // s
+    case 40: // down
+      return 'down'
+
+    case 65: // a
+    case 37: // left
+      return 'left'
   }
-  var colour = '#';
-  for (var i = 0; i < 3; i++) {
-    var value = (hash >> (i * 8)) & 0xFF;
-    colour += ('00' + value.toString(16)).substr(-2);
-  }
-  return colour;
 }
-  
