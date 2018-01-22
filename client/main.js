@@ -4,8 +4,11 @@ import Player from './Player.js'
 import Apple from './Apple.js'
 
 const socket = io()
-const canvas = document.getElementById('canvas')
+const canvas = document.createElement('canvas')
 const ctx = canvas.getContext('2d')
+
+document.body.appendChild(canvas)
+
 let world = {}
 let players = []
 let apples = []

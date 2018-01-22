@@ -3,10 +3,13 @@ const { randomInteger } = require('./helpers.js')
 
 class Apple {
   constructor() {
-    this.reposition()
+    this.respawn()
   }
 
-  reposition() {
+  /**
+   * Moves the apple to a random position in the world.
+   */
+  respawn() {
     // Generate a random x and y position
     this.x = randomInteger(0, world.width)
     this.y = randomInteger(0, world.height)

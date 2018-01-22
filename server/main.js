@@ -6,17 +6,14 @@ const io = require('socket.io')(server, {
   path: '/socket.io',
   serveClient: false,
 })
-const world = require('./world.js')
 const Player = require('./Player.js')
 const PlayerPiece = require('./PlayerPiece.js')
 const Apple = require('./Apple.js')
+const world = require('./world.js')
 // `players` is a Map mapping client `socket.id` to an instance of `Player`
-const players = new Map()
+let players = new Map()
 // `apples` is an array of instances of `Apple`
-const apples = []
-
-app.use(express.static('dist'))
-server.listen(process.env.PORT)
+let apples = []
 
 // When a client connects to the web socket server
 io.on('connect', (socket) => {
@@ -62,7 +59,7 @@ function gameTick() {
 
     // If the player's head collided with an apple
     const didEatApple = apples.some((apple) => 
-      head.isCollidingWith(apple) && apple.reposition()
+      head.isCollidingWith(apple) && apple.respawn()
     )
 
     if (didEatApple) {
@@ -92,3 +89,6 @@ function gameTick() {
     apples: apples.map(apple => apple.serialize()),
   })
 }
+
+app.use(express.static('dist'))
+server.listen(process.env.PORT)

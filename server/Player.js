@@ -15,6 +15,9 @@ class Player {
     this.nextDirection = null
   }
 
+  /**
+   * Returns the x component of the direction vector.
+   */
   get dx() {
     switch (this.direction) {
       case 'up': return 0
@@ -24,6 +27,9 @@ class Player {
     }
   }
 
+  /**
+   * Returns the y component of the direction vector.
+   */
   get dy() {
     switch (this.direction) {
       case 'up': return -1
@@ -33,18 +39,17 @@ class Player {
     }
   }
 
+  /**
+   * Deletes the tail and adds a new head in the current direction.
+   */
   move() {
-    const head = this.head()
-    this.pieces.shift()
-    const x = Math.min(Math.max(head.x + this.dx, 0), world.width - 1)
-    const y = Math.min(Math.max(head.y + this.dy, 0), world.height - 1)
-    this.pieces.push(new PlayerPiece(x, y))
-    if (this.nextDirection) {
-      this.direction = this.nextDirection
-      this.nextDirection = null
-    }
+    this.grow()
+    this.shrink()
   }
 
+  /**
+   * Adds a new head in the current direction.
+   */
   grow() {
     const head = this.head()
     const x = Math.min(Math.max(head.x + this.dx, 0), world.width - 1)
@@ -56,10 +61,23 @@ class Player {
     }
   }
 
+  /**
+   * Deletes the tail.
+   */
+  shrink() {
+    this.pieces.shift()
+  }
+
+  /**
+   * Returns the head.
+   */
   head() {
     return this.pieces[this.pieces.length - 1]
   }
 
+  /**
+   * @param {string} direction 'up', 'right', 'down', 'left'
+   */
   setDirection(direction) {
     if (
       direction === 'up' && this.direction === 'down' ||

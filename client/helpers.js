@@ -1,3 +1,8 @@
+/**
+ * Returns the direction associated with a given `keyCode`.
+ * 
+ * @param {number} keyCode 
+ */
 export function keyCodeToDirection(keyCode) {
   switch(event.keyCode) {
     case 87: // w

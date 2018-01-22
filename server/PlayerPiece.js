@@ -4,6 +4,11 @@ class PlayerPiece {
     this.y = y
   }
 
+  /**
+   * Whether or not this piece is colliding with another piece.
+   * 
+   * @param {PlayerPiece} playerPiece 
+   */
   isCollidingWith(playerPiece) {
     return this !== playerPiece &&
       this.x === playerPiece.x &&
