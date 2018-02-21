@@ -4,7 +4,7 @@
  * @param {number} keyCode 
  */
 export function keyCodeToDirection(keyCode) {
-  switch(event.keyCode) {
+  switch(keyCode) {
     case 87: // w
     case 38: // up
       return 'up'
